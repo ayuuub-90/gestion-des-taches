@@ -285,6 +285,34 @@ void supprimerTache(){
 
 }
 
+// fonction des statistics, total des taches en general, total des tache a realise, total des taches en cours de realisation, total des taches en finis
+void statistique(){
+    system("clear");
+    printf(COLOR_YELLOW "--------------------------------------------------------------\n");
+    printf("                   statistiques des taches                    \n");
+    printf("--------------------------------------------------------------\n" COLOR_RESET);
+    if(taille == 0){
+        printf(COLOR_RED "aucun tache availaible, aucun statistique pour l'afficher\n" COLOR_RESET);
+        return;
+    }
+    int nbre_tache_a_realiser = 0;
+    int nbre_tache_en_cours_de_realisation = 0;
+    int nbre_tache_en_finis = 0;
+    for(int i=0; i<taille; i++){
+        if(strcmp(taches[i].status, "a realiser") == 0) 
+            nbre_tache_a_realiser++;
+        if(strcmp(taches[i].status, "en cours de realisation") == 0) 
+            nbre_tache_en_cours_de_realisation++;
+        if(strcmp(taches[i].status, "en finis") == 0) 
+            nbre_tache_en_finis++;
+    }
+    printf("total des taches: %d\n", taille);
+    printf("nombre des taches a realiser: %d\n", nbre_tache_a_realiser);
+    printf("nombre des taches en cours de realisation: %d\n", nbre_tache_en_cours_de_realisation);
+    printf("nombre des taches en finis: %d\n", nbre_tache_en_finis);
+
+}
+
 void menu(){
     int choice;
     do{
@@ -311,6 +339,7 @@ void menu(){
             case 4: modifierTache(); break;
             case 5: rechercherTache(); break;
             case 6: supprimerTache(); break;
+            case 7: statistique(); break;
             case 0:
                 printf(COLOR_GREEN "merci pour votre visit..\n\n" COLOR_RESET);
                 exit(1);
@@ -321,7 +350,7 @@ void menu(){
         }
 
     }
-    while(choice != 7);
+    while(choice != 8);
 }
 
 int main(){
